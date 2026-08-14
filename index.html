@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="CivicLens - Smart Civic Issue Reporting and Monitoring Platform">
+
+    <title>CivicLens | Smart Civic Issue Reporting</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+</head>
+
+<body>
+
+    <!-- ==========================================
+         NAVIGATION BAR
+    =========================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                <span class="logo-icon">C</span>
+                <span class="logo-text">Civic<span>Lens</span></span>
+            </a>
+
+            <button class="menu-button" id="menuButton">
+                ☰
+            </button>
+
+            <nav class="nav-menu" id="navMenu">
+
+                <a href="index.html" class="nav-link active">
+                    Home
+                </a>
+
+                <a href="#how-it-works" class="nav-link">
+                    How It Works
+                </a>
+
+                <a href="#features" class="nav-link">
+                    Features
+                </a>
+
+                <a href="report.html" class="nav-link">
+                    Report
+                </a>
+
+                <a href="track.html" class="nav-link">
+                    Track
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         HERO SECTION
+    =========================================== -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-container">
+
+                <div class="hero-content">
+
+                    <div class="hero-badge">
+                        <span class="pulse-dot"></span>
+                        Smart Civic Technology
+                    </div>
+
+                    <h1>
+                        Make Your City
+                        <span>Better Together.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        CivicLens helps citizens report civic problems,
+                        track complaints, and monitor issues in their
+                        community through one smart and transparent platform.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="report.html" class="primary-button report-btn">
+                            Report an Issue
+                            <span>→</span>
+                        </a>
+
+                        <a href="track.html" class="secondary-button track-btn">
+                            Track Complaint
+                        </a>
+
+                    </div>
+
+                    <div class="hero-trust">
+
+                        <div class="trust-item">
+                            <strong>Easy</strong>
+                            <span>to Report</span>
+                        </div>
+
+                        <div class="trust-line"></div>
+
+                        <div class="trust-item">
+                            <strong>Smart</strong>
+                            <span>Analysis</span>
+                        </div>
+
+                        <div class="trust-line"></div>
+
+                        <div class="trust-item">
+                            <strong>Transparent</strong>
+                            <span>Tracking</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HERO VISUAL -->
+
+                <div class="hero-visual">
+
+                    <div class="dashboard-card">
+
+                        <div class="dashboard-header">
+
+                            <div>
+                                <span class="small-label">
+                                    CIVICLENS
+                                </span>
+
+                                <h3>
+                                    Civic Issue Overview
+                                </h3>
+                            </div>
+
+                            <div class="status-online">
+                                <span></span>
+                                Live
+                            </div>
+
+                        </div>
+
+
+                        <div class="mini-map">
+
+                            <div class="map-grid"></div>
+
+                            <div class="map-road road-one"></div>
+                            <div class="map-road road-two"></div>
+                            <div class="map-road road-three"></div>
+
+                            <div class="map-marker marker-one">
+                                <span>!</span>
+                            </div>
+
+                            <div class="map-marker marker-two">
+                                <span>!</span>
+                            </div>
+
+                            <div class="map-marker marker-three">
+                                <span>!</span>
+                            </div>
+
+                            <div class="map-marker marker-four">
+                                <span>!</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="issue-summary">
+
+                            <div class="summary-item">
+                                <span class="summary-icon orange">
+                                    !
+                                </span>
+
+                                <div>
+                                    <strong>24</strong>
+                                    <small>Reported</small>
+                                </div>
+                            </div>
+
+                            <div class="summary-item">
+                                <span class="summary-icon blue">
+                                    ↻
+                                </span>
+
+                                <div>
+                                    <strong>12</strong>
+                                    <small>In Progress</small>
+                                </div>
+                            </div>
+
+                            <div class="summary-item">
+                                <span class="summary-icon green">
+                                    ✓
+                                </span>
+
+                                <div>
+                                    <strong>38</strong>
+                                    <small>Resolved</small>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="floating-card floating-card-one">
+
+                        <div class="floating-icon">
+                            ✓
+                        </div>
+
+                        <div>
+                            <strong>Issue Resolved</strong>
+                            <small>Pothole • 2 min ago</small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-card floating-card-two">
+
+                        <div class="floating-icon purple">
+                            ⚡
+                        </div>
+
+                        <div>
+                            <strong>Smart Analysis</strong>
+                            <small>Priority detected</small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             STATISTICS
+        =========================================== -->
+
+        <section class="statistics">
+
+            <div class="container statistics-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-number">
+                        1,250+
+                    </div>
+
+                    <div class="stat-label">
+                        Issues Reported
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-number">
+                        860+
+                    </div>
+
+                    <div class="stat-label">
+                        Issues Resolved
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-number">
+                        95%
+                    </div>
+
+                    <div class="stat-label">
+                        Response Rate
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-number">
+                        24/7
+                    </div>
+
+                    <div class="stat-label">
+                        Platform Availability
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             HOW IT WORKS
+        =========================================== -->
+
+        <section class="section" id="how-it-works">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        HOW IT WORKS
+                    </span>
+
+                    <h2>
+                        From Problem to Solution
+                    </h2>
+
+                    <p>
+                        CivicLens makes reporting civic problems
+                        simple, transparent, and trackable.
+                    </p>
+
+                </div>
+
+
+                <div class="steps-grid">
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            01
+                        </div>
+
+                        <div class="step-icon">
+                            📸
+                        </div>
+
+                        <h3>
+                            Report
+                        </h3>
+
+                        <p>
+                            Capture the civic issue, add a description,
+                            category, priority, and location.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            02
+                        </div>
+
+                        <div class="step-icon">
+                            🧠
+                        </div>
+
+                        <h3>
+                            Smart Analysis
+                        </h3>
+
+                        <p>
+                            JavaScript-based smart analysis identifies
+                            important keywords and suggests issue priority.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            03
+                        </div>
+
+                        <div class="step-icon">
+                            📍
+                        </div>
+
+                        <h3>
+                            Track
+                        </h3>
+
+                        <p>
+                            Receive a unique complaint ID and track
+                            the progress of your report.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            04
+                        </div>
+
+                        <div class="step-icon">
+                            ✅
+                        </div>
+
+                        <h3>
+                            Resolve
+                        </h3>
+
+                        <p>
+                            Monitor the complaint until the civic issue
+                            is marked as resolved.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             FEATURES
+        =========================================== -->
+
+        <section class="section features-section" id="features">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        PLATFORM FEATURES
+                    </span>
+
+                    <h2>
+                        One Platform. Better Communities.
+                    </h2>
+
+                    <p>
+                        Designed to connect citizens, civic issues,
+                        and transparent monitoring.
+                    </p>
+
+                </div>
+
+
+                <div class="features-grid">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            📍
+                        </div>
+
+                        <h3>
+                            Location-Based Reporting
+                        </h3>
+
+                        <p>
+                            Capture the exact location of civic problems
+                            using browser geolocation.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            🧠
+                        </div>
+
+                        <h3>
+                            Smart Issue Analysis
+                        </h3>
+
+                        <p>
+                            Analyze descriptions using JavaScript rules
+                            to identify categories and urgency.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            📊
+                        </div>
+
+                        <h3>
+                            Civic Analytics
+                        </h3>
+
+                        <p>
+                            Visualize issue categories, priorities,
+                            statuses, and community trends.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            🗺️
+                        </div>
+
+                        <h3>
+                            Interactive Civic Map
+                        </h3>
+
+                        <p>
+                            Explore reported civic issues on an
+                            interactive map.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            🔎
+                        </div>
+
+                        <h3>
+                            Complaint Tracking
+                        </h3>
+
+                        <p>
+                            Track complaints using a unique reference ID
+                            and status timeline.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            🔔
+                        </div>
+
+                        <h3>
+                            Smart Notifications
+                        </h3>
+
+                        <p>
+                            Receive clear visual notifications when
+                            complaints are submitted or updated.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             CTA
+        =========================================== -->
+
+        <section class="cta-section">
+
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <div>
+
+                        <span class="section-label light">
+                            MAKE A DIFFERENCE
+                        </span>
+
+                        <h2>
+                            See a problem?
+                            <br>
+                            Let your city know.
+                        </h2>
+
+                        <p>
+                            Every report can help make our communities
+                            safer, cleaner, and better.
+                        </p>
+
+                    </div>
+
+                    <a href="report.html" class="cta-button report-btn">
+                        Report an Issue →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div class="footer-brand">
+
+                <div class="logo footer-logo">
+                    <span class="logo-icon">C</span>
+                    <span class="logo-text">
+                        Civic<span>Lens</span>
+                    </span>
+                </div>
+
+                <p>
+                    A smart civic issue reporting and monitoring
+                    platform for better communities.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="#how-it-works">
+                    How It Works
+                </a>
+
+                <a href="#features">
+                    Features
+                </a>
+
+                <a href="report.html">
+                    Report Issue
+                </a>
+
+                <a href="track.html">
+                    Track Complaint
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    © <span id="currentYear"></span> CivicLens.
+                    Built for smarter and more connected communities.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="CivicLens Community Reports - View civic issues reported by citizens."
+    >
+
+    <title>Community Reports | CivicLens</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+
+                <span class="logo-icon">
+                    CL
+                </span>
+
+                <span>
+                    Civic<span>Lens</span>
+                </span>
+
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="report.html">
+                    Report Issue
+                </a>
+
+                <a href="track.html">
+                    Track
+                </a>
+
+                <a href="community.html" class="active">
+                    Community
+                </a>
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+
+                <a href="map.html">
+                    Map
+                </a>
+
+                <a href="analytics.html">
+                    Analytics
+                </a>
+
+                <a href="admin.html">
+                    Admin
+                </a>
+
+            </nav>
+
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="page-header">
+
+        <div class="container">
+
+            <div class="page-header-content">
+
+                <span class="section-badge">
+                    👥 Community Reports
+                </span>
+
+
+                <h1>
+                    Civic Issues Reported by Citizens
+                </h1>
+
+
+                <p>
+                    View civic problems reported by people in
+                    the community and stay informed about local issues.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         COMMUNITY SECTION
+    ====================================================== -->
+
+    <main class="container community-page">
+
+
+        <!-- SUMMARY -->
+
+        <div class="community-summary">
+
+            <div class="community-summary-card">
+
+                <span class="community-summary-icon">
+                    📢
+                </span>
+
+                <div>
+
+                    <strong id="totalCommunityIssues">
+                        0
+                    </strong>
+
+                    <span>
+                        Total Reports
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="community-summary-card">
+
+                <span class="community-summary-icon">
+                    🔄
+                </span>
+
+                <div>
+
+                    <strong id="activeCommunityIssues">
+                        0
+                    </strong>
+
+                    <span>
+                        Active Issues
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="community-summary-card">
+
+                <span class="community-summary-icon">
+                    ✅
+                </span>
+
+                <div>
+
+                    <strong id="resolvedCommunityIssues">
+                        0
+                    </strong>
+
+                    <span>
+                        Resolved
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SEARCH / FILTER -->
+
+        <section class="community-filter-card">
+
+            <div class="community-filter-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        COMMUNITY ISSUES
+                    </span>
+
+                    <h2>
+                        Browse Reported Issues
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="community-filters">
+
+                <input
+                    type="text"
+                    id="communitySearch"
+                    placeholder="Search civic issues..."
+                >
+
+
+                <select id="communityCategory">
+
+                    <option value="all">
+                        All Categories
+                    </option>
+
+                    <option value="Pothole">
+                        Pothole
+                    </option>
+
+                    <option value="Garbage">
+                        Garbage
+                    </option>
+
+                    <option value="Streetlight">
+                        Streetlight
+                    </option>
+
+                    <option value="Water Leakage">
+                        Water Leakage
+                    </option>
+
+                    <option value="Drainage">
+                        Drainage
+                    </option>
+
+                    <option value="Road Damage">
+                        Road Damage
+                    </option>
+
+                    <option value="Traffic Issue">
+                        Traffic Issue
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+
+                <select id="communityStatus">
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="Reported">
+                        Reported
+                    </option>
+
+                    <option value="Verified">
+                        Verified
+                    </option>
+
+                    <option value="In Progress">
+                        In Progress
+                    </option>
+
+                    <option value="Resolved">
+                        Resolved
+                    </option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- REPORT CARDS -->
+
+        <section class="community-reports-section">
+
+            <div
+                id="communityReports"
+                class="community-reports-grid"
+            >
+                <!-- Reports inserted by JavaScript -->
+            </div>
+
+
+            <div
+                id="communityEmpty"
+                class="community-empty"
+                style="display:none;"
+            >
+
+                <div class="community-empty-icon">
+                    📋
+                </div>
+
+                <h3>
+                    No Reports Found
+                </h3>
+
+                <p>
+                    No civic complaints match your search.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div>
+
+                    <a
+                        href="index.html"
+                        class="logo footer-logo"
+                    >
+
+                        <span class="logo-icon">
+                            CL
+                        </span>
+
+                        <span>
+                            Civic<span>Lens</span>
+                        </span>
+
+                    </a>
+
+
+                    <p>
+                        Smart civic issue reporting,
+                        monitoring and community participation.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <a href="index.html">
+                        Home
+                    </a>
+
+                    <a href="report.html">
+                        Report Issue
+                    </a>
+
+                    <a href="track.html">
+                        Track
+                    </a>
+
+                    <a href="community.html">
+                        Community
+                    </a>
+
+                    <a href="dashboard.html">
+                        Dashboard
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 CivicLens. College Project Prototype.
+                </p>
+
+                <p>
+                    Built with HTML • CSS • JavaScript
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="js/app.js"></script>
+
+    <script src="js/community.js"></script>
+
+
+</body>
+
+</html>

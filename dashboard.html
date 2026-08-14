@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="CivicLens citizen dashboard"
+    >
+
+    <title>Citizen Dashboard | CivicLens</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+
+                <span class="logo-icon">◉</span>
+
+                Civic<span>Lens</span>
+
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="report.html">
+                    Report Issue
+                </a>
+
+                <a href="track.html">
+                    Track Complaint
+                </a>
+
+                <a
+                    href="dashboard.html"
+                    class="active"
+                >
+                    Dashboard
+                </a>
+
+                <a href="map.html">
+                    Issue Map
+                </a>
+
+            </nav>
+
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         PAGE HEADER
+         ===================================================== -->
+
+    <main>
+
+        <section class="dashboard-header">
+
+            <div class="container">
+
+                <div class="dashboard-header-content">
+
+                    <div>
+
+                        <span class="section-badge">
+                            Citizen Dashboard
+                        </span>
+
+                        <h1>
+                            Civic Issue
+                            <span class="gradient-text">
+                                Overview
+                            </span>
+                        </h1>
+
+                        <p>
+                            Monitor your reported civic issues,
+                            complaint progress and community
+                            statistics in one place.
+                        </p>
+
+                    </div>
+
+
+                    <div class="dashboard-header-actions">
+
+                        <a
+                            href="report.html"
+                            class="btn btn-primary"
+                        >
+                            + Report New Issue
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             DASHBOARD CONTENT
+             ===================================================== -->
+
+        <section class="dashboard-section">
+
+            <div class="container">
+
+
+                <!-- =================================================
+                     STATISTICS CARDS
+                     ================================================= -->
+
+                <div class="stats-grid">
+
+
+                    <!-- TOTAL -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-top">
+
+                            <div class="stat-icon blue">
+                                📋
+                            </div>
+
+                            <span class="stat-label">
+                                Total Reports
+                            </span>
+
+                        </div>
+
+                        <div
+                            class="stat-number"
+                            id="totalComplaints"
+                        >
+                            0
+                        </div>
+
+                        <p>
+                            All civic issues reported
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- REPORTED -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-top">
+
+                            <div class="stat-icon orange">
+                                📝
+                            </div>
+
+                            <span class="stat-label">
+                                Reported
+                            </span>
+
+                        </div>
+
+                        <div
+                            class="stat-number"
+                            id="reportedComplaints"
+                        >
+                            0
+                        </div>
+
+                        <p>
+                            Awaiting verification
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- VERIFIED -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-top">
+
+                            <div class="stat-icon purple">
+                                🔍
+                            </div>
+
+                            <span class="stat-label">
+                                Verified
+                            </span>
+
+                        </div>
+
+                        <div
+                            class="stat-number"
+                            id="verifiedComplaints"
+                        >
+                            0
+                        </div>
+
+                        <p>
+                            Verified civic reports
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- IN PROGRESS -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-top">
+
+                            <div class="stat-icon yellow">
+                                🛠️
+                            </div>
+
+                            <span class="stat-label">
+                                In Progress
+                            </span>
+
+                        </div>
+
+                        <div
+                            class="stat-number"
+                            id="progressComplaints"
+                        >
+                            0
+                        </div>
+
+                        <p>
+                            Currently being handled
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- RESOLVED -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-top">
+
+                            <div class="stat-icon green">
+                                ✅
+                            </div>
+
+                            <span class="stat-label">
+                                Resolved
+                            </span>
+
+                        </div>
+
+                        <div
+                            class="stat-number"
+                            id="resolvedComplaints"
+                        >
+                            0
+                        </div>
+
+                        <p>
+                            Successfully resolved
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- HIGH PRIORITY -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-top">
+
+                            <div class="stat-icon red">
+                                🚨
+                            </div>
+
+                            <span class="stat-label">
+                                High Priority
+                            </span>
+
+                        </div>
+
+                        <div
+                            class="stat-number"
+                            id="highPriorityComplaints"
+                        >
+                            0
+                        </div>
+
+                        <p>
+                            Urgent civic issues
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ANALYTICS GRID
+                     ================================================= -->
+
+                <div class="analytics-grid">
+
+
+                    <!-- CATEGORY ANALYTICS -->
+
+                    <div class="analytics-card">
+
+                        <div class="analytics-card-header">
+
+                            <div>
+
+                                <span class="analytics-eyebrow">
+                                    Issue Distribution
+                                </span>
+
+                                <h2>
+                                    Issues by Category
+                                </h2>
+
+                            </div>
+
+                            <span class="analytics-icon">
+                                📊
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            id="categoryChart"
+                            class="category-chart"
+                        >
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- STATUS ANALYTICS -->
+
+                    <div class="analytics-card">
+
+                        <div class="analytics-card-header">
+
+                            <div>
+
+                                <span class="analytics-eyebrow">
+                                    Complaint Progress
+                                </span>
+
+                                <h2>
+                                    Status Overview
+                                </h2>
+
+                            </div>
+
+                            <span class="analytics-icon">
+                                📈
+                            </span>
+
+                        </div>
+
+
+                        <div class="status-chart-area">
+
+                            <div
+                                class="donut-chart"
+                                id="donutChart"
+                            >
+
+                                <div class="donut-center">
+
+                                    <strong
+                                        id="resolutionPercentage"
+                                    >
+                                        0%
+                                    </strong>
+
+                                    <span>
+                                        Resolved
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                id="statusLegend"
+                                class="status-legend"
+                            >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PRIORITY + INSIGHTS
+                     ================================================= -->
+
+                <div class="secondary-dashboard-grid">
+
+
+
+
+                <!-- =================================================
+                     RECENT COMPLAINTS
+                     ================================================= -->
+
+                
+
+                <!-- =================================================
+                     QUICK ACTIONS
+                     ================================================= -->
+
+                <div class="quick-actions-section">
+
+                    <div class="section-heading">
+
+                        <span class="section-badge">
+                            Quick Actions
+                        </span>
+
+                        <h2>
+                            What would you like to do?
+                        </h2>
+
+                    </div>
+
+
+                    <div class="quick-actions-grid">
+
+
+                        <a
+                            href="report.html"
+                            class="quick-action-card"
+                        >
+
+                            <div class="quick-action-icon">
+                                📢
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Report an Issue
+                                </h3>
+
+                                <p>
+                                    Report a new civic problem
+                                    in your area.
+                                </p>
+
+                            </div>
+
+                            <span class="quick-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+
+                        <a
+                            href="track.html"
+                            class="quick-action-card"
+                        >
+
+                            <div class="quick-action-icon">
+                                🔎
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Track Complaint
+                                </h3>
+
+                                <p>
+                                    Check the progress of
+                                    your complaint.
+                                </p>
+
+                            </div>
+
+                            <span class="quick-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+
+                        <a
+                            href="map.html"
+                            class="quick-action-card"
+                        >
+
+                            <div class="quick-action-icon">
+                                🗺️
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Explore Issue Map
+                                </h3>
+
+                                <p>
+                                    See civic issues reported
+                                    around the area.
+                                </p>
+
+                            </div>
+
+                            <span class="quick-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         TOAST
+         ===================================================== -->
+
+    <div
+        id="toast"
+        class="toast"
+    >
+    </div>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div>
+
+                    <a
+                        href="index.html"
+                        class="logo footer-logo"
+                    >
+
+                        <span class="logo-icon">
+                            ◉
+                        </span>
+
+                        Civic<span>Lens</span>
+
+                    </a>
+
+                    <p>
+                        Making civic problem reporting smarter,
+                        faster and more transparent.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <a href="index.html">
+                        Home
+                    </a>
+
+                    <a href="report.html">
+                        Report Issue
+                    </a>
+
+                    <a href="track.html">
+                        Track Complaint
+                    </a>
+
+                    <a href="dashboard.html">
+                        Dashboard
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 CivicLens. College Project Prototype.
+                </p>
+
+                <p>
+                    Built with HTML • CSS • JavaScript
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script src="js/app.js"></script>
+
+    <script src="js/dashboard.js"></script>
+
+
+</body>
+
+</html>

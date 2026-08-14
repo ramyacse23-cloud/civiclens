@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="CivicLens - Admin Panel"
+    >
+
+    <title>Admin | CivicLens</title>
+
+
+    <!-- Google Font -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Main CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+
+            <a href="index.html" class="logo">
+
+                <span class="logo-icon">
+                    CL
+                </span>
+
+                <span>
+                    Civic<span>Lens</span>
+                </span>
+
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="report.html">
+                    Report Issue
+                </a>
+
+                <a href="track.html">
+                    Track
+                </a>
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+
+                <a href="map.html">
+                    Map
+                </a>
+
+                <a href="analytics.html">
+                    Analytics
+                </a>
+
+                <a href="admin.html" class="active">
+                    Admin
+                </a>
+
+            </nav>
+
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= ADMIN PAGE ================= -->
+
+    <main>
+
+        <section class="admin-section">
+
+            <div class="container">
+
+
+                <!-- PAGE HEADING -->
+
+                <div class="admin-heading">
+
+                    <span class="section-badge">
+                        ⚙️ Administration
+                    </span>
+
+                    <h1>
+                        CivicLens Admin Panel
+                    </h1>
+
+                    <p>
+                        Manage reported civic issues and monitor
+                        complaint status from one place.
+                    </p>
+
+                </div>
+
+
+
+                <!-- ================= SUMMARY ================= -->
+
+                <div class="admin-summary">
+
+
+                    <div class="admin-summary-card">
+
+                        <div class="admin-summary-icon blue">
+                            📋
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Total Complaints
+                            </span>
+
+                            <strong id="adminTotal">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="admin-summary-card">
+
+                        <div class="admin-summary-icon orange">
+                            ⚠️
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Pending
+                            </span>
+
+                            <strong id="adminPending">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="admin-summary-card">
+
+                        <div class="admin-summary-icon purple">
+                            🔄
+                        </div>
+
+                        <div>
+
+                            <span>
+                                In Progress
+                            </span>
+
+                            <strong id="adminProgress">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="admin-summary-card">
+
+                        <div class="admin-summary-icon green">
+                            ✅
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Resolved
+                            </span>
+
+                            <strong id="adminResolved">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ================= ADMIN CONTENT ================= -->
+
+                <div class="admin-panel">
+
+
+                    <div class="admin-panel-header">
+
+                        <div>
+
+                            <span class="panel-label">
+                                COMPLAINT MANAGEMENT
+                            </span>
+
+                            <h2>
+                                Reported Civic Issues
+                            </h2>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="admin-refresh-btn"
+                            id="refreshAdminBtn"
+                        >
+                            ↻ Refresh
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- FILTERS -->
+
+                    <div class="admin-filters">
+
+
+                        <div class="admin-filter-group">
+
+                            <label for="adminSearch">
+                                Search
+                            </label>
+
+                            <input
+                                type="text"
+                                id="adminSearch"
+                                placeholder="Search complaint ID or issue..."
+                            >
+
+                        </div>
+
+
+
+                        <div class="admin-filter-group">
+
+                            <label for="adminStatusFilter">
+                                Status
+                            </label>
+
+                            <select id="adminStatusFilter">
+
+                                <option value="all">
+                                    All Status
+                                </option>
+
+                                <option value="Reported">
+                                    Reported
+                                </option>
+
+                                <option value="Verified">
+                                    Verified
+                                </option>
+
+                                <option value="In Progress">
+                                    In Progress
+                                </option>
+
+                                <option value="Resolved">
+                                    Resolved
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <div class="admin-filter-group">
+
+                            <label for="adminPriorityFilter">
+                                Priority
+                            </label>
+
+                            <select id="adminPriorityFilter">
+
+                                <option value="all">
+                                    All Priority
+                                </option>
+
+                                <option value="High">
+                                    High
+                                </option>
+
+                                <option value="Medium">
+                                    Medium
+                                </option>
+
+                                <option value="Low">
+                                    Low
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- COMPLAINT TABLE -->
+
+                    <div class="admin-table-wrapper">
+
+                        <table class="admin-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Complaint ID
+                                    </th>
+
+                                    <th>
+                                        Issue
+                                    </th>
+
+                                    <th>
+                                        Category
+                                    </th>
+
+                                    <th>
+                                        Priority
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Action
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="adminTableBody">
+
+                                <!-- JavaScript will insert complaints -->
+
+                            </tbody>
+
+                        </table>
+
+
+                        <div
+                            id="adminEmptyState"
+                            class="admin-empty"
+                        >
+
+                            <div class="admin-empty-icon">
+                                📋
+                            </div>
+
+                            <h3>
+                                No Complaints Found
+                            </h3>
+
+                            <p>
+                                There are no complaints matching
+                                the selected filters.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+
+                <div>
+
+                    <div class="logo footer-logo">
+
+                        <span class="logo-icon">
+                            CL
+                        </span>
+
+                        <span>
+                            Civic<span>Lens</span>
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Smart civic issue reporting,
+                        monitoring and analytics.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <a href="index.html">
+                        Home
+                    </a>
+
+                    <a href="report.html">
+                        Report Issue
+                    </a>
+
+                    <a href="track.html">
+                        Track
+                    </a>
+
+                    <a href="analytics.html">
+                        Analytics
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 CivicLens. Final Year Project.
+                </p>
+
+                <p>
+                    Built with HTML • CSS • JavaScript
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="js/app.js"></script>
+
+    <script src="js/admin.js"></script>
+
+
+</body>
+
+</html>

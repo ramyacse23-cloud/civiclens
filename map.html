@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="CivicLens - Interactive Civic Issue Map"
+    >
+
+    <title>Issue Map | CivicLens</title>
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+         ===================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         MAIN CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+
+    <!-- =====================================================
+         LEAFLET CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <!-- =====================================================
+         MAP PAGE CSS
+         ===================================================== -->
+
+    <style>
+
+        /* =================================================
+           MAP PAGE
+           ================================================= */
+
+        .map-page {
+            background: #f5f7fb;
+            min-height: calc(100vh - 76px);
+            padding-bottom: 50px;
+        }
+
+
+        /* =================================================
+           PAGE HEADER
+           ================================================= */
+
+        .map-page-header {
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(37, 99, 235, 0.14),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #eef5ff,
+                    #f8faff
+                );
+
+            padding: 55px 0 45px;
+
+            border-bottom: 1px solid #e5eaf2;
+        }
+
+        .map-page-header-content {
+            max-width: 800px;
+
+            margin: 0 auto;
+
+            text-align: center;
+        }
+
+        .map-badge {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 8px 15px;
+
+            border-radius: 50px;
+
+            background: #ffffff;
+
+            border: 1px solid #dbe7ff;
+
+            color: #2563eb;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 5px 18px rgba(37, 99, 235, 0.08);
+        }
+
+        .map-page-header h1 {
+            margin-top: 17px;
+
+            color: #111827;
+
+            font-size: clamp(34px, 5vw, 50px);
+
+            line-height: 1.15;
+
+            font-weight: 800;
+        }
+
+        .map-page-header h1 span {
+            color: #2563eb;
+        }
+
+        .map-page-header p {
+            max-width: 650px;
+
+            margin: 15px auto 0;
+
+            color: #667085;
+
+            font-size: 15px;
+        }
+
+
+        /* =================================================
+           MAP MAIN CONTAINER
+           ================================================= */
+
+        .map-container {
+            width: min(1180px, 92%);
+
+            margin: 35px auto 0;
+        }
+
+
+        /* =================================================
+           LOCATION CONTROL CARD
+           ================================================= */
+
+        .map-control-card {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 18px 22px;
+
+            margin-bottom: 18px;
+
+            background: #ffffff;
+
+            border: 1px solid #e3e8f0;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 8px 25px rgba(15, 23, 42, 0.06);
+        }
+
+
+        .location-control-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            min-width: 0;
+        }
+
+
+        .location-icon {
+
+            width: 42px;
+            height: 42px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            font-size: 20px;
+        }
+
+
+        .location-text h3 {
+
+            margin: 0 0 2px;
+
+            color: #172033;
+
+            font-size: 15px;
+
+            font-weight: 700;
+        }
+
+
+        .location-text p {
+
+            margin: 0;
+
+            color: #7a8496;
+
+            font-size: 12px;
+        }
+
+
+        /* =================================================
+           LOCATION BUTTON
+           ================================================= */
+
+        .my-location-btn {
+
+            flex-shrink: 0;
+
+            border: none;
+
+            padding: 11px 18px;
+
+            border-radius: 9px;
+
+            background: #2563eb;
+
+            color: #ffffff;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: all 0.25s ease;
+
+            box-shadow:
+                0 6px 15px rgba(37, 99, 235, 0.20);
+        }
+
+
+        .my-location-btn:hover {
+
+            background: #1d4ed8;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 9px 20px rgba(37, 99, 235, 0.25);
+        }
+
+
+        .my-location-btn:disabled {
+
+            opacity: 0.65;
+
+            cursor: wait;
+
+            transform: none;
+        }
+
+
+        /* =================================================
+           LOCATION STATUS
+           ================================================= */
+
+        .location-status {
+
+            display: none;
+
+            margin-bottom: 18px;
+
+            padding: 13px 16px;
+
+            border-radius: 10px;
+
+            background: #ffffff;
+
+            border: 1px solid #e3e8f0;
+
+            color: #667085;
+
+            font-size: 13px;
+        }
+
+
+        .location-status.show {
+
+            display: block;
+        }
+
+
+        .location-status.success {
+
+            background: #f0fdf4;
+
+            border-color: #bbf7d0;
+
+            color: #15803d;
+        }
+
+
+        .location-status.error {
+
+            background: #fef2f2;
+
+            border-color: #fecaca;
+
+            color: #dc2626;
+        }
+
+
+        /* =================================================
+           MAP CARD
+           ================================================= */
+
+        .map-card {
+
+            overflow: hidden;
+
+            background: #ffffff;
+
+            border: 1px solid #e3e8f0;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 15px 40px rgba(15, 23, 42, 0.08);
+        }
+        <div class="map-location-controls">
+
+    <button
+        type="button"
+        id="useMyLocation"
+        class="location-button"
+    >
+        📍 Use My Location
+    </button>
+
+    <span id="locationStatus" class="location-status">
+        Select your location or use your current location.
+    </span>
+
+    <button
+        type="button"
+        id="submitLocationBtn"
+        class="location-submit-button"
+    >
+        ✅ Submit Location
+    </button>
+
+</div>
+
+
+        /* =================================================
+           MAP HEADER
+           ================================================= */
+
+        .map-card-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 18px 22px;
+
+            border-bottom: 1px solid #edf0f5;
+
+            background: #ffffff;
+        }
+
+
+        .map-card-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .map-card-title-icon {
+
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            font-size: 18px;
+        }
+
+
+        .map-card-title h2 {
+
+            margin: 0;
+
+            color: #172033;
+
+            font-size: 17px;
+
+            font-weight: 700;
+        }
+
+
+        .map-card-title p {
+
+            margin: 2px 0 0;
+
+            color: #8a94a6;
+
+            font-size: 11px;
+        }
+
+
+        .map-live-status {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 6px 10px;
+
+            border-radius: 50px;
+
+            background: #f0fdf4;
+
+            color: #15803d;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        .map-live-dot {
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+
+            box-shadow:
+                0 0 0 4px rgba(34, 197, 94, 0.12);
+        }
+
+
+        /* =================================================
+           ACTUAL MAP
+           ================================================= */
+
+        #map {
+
+            width: 100%;
+
+            height: 600px;
+
+            min-height: 450px;
+        }
+
+
+        /* =================================================
+           COORDINATES BOX
+           ================================================= */
+
+        .coordinates-box {
+
+            display: none;
+
+            padding: 16px 22px;
+
+            background: #f8fafc;
+
+            border-top: 1px solid #edf0f5;
+        }
+
+
+        .coordinates-box.show {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 30px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .coordinate-item {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 2px;
+        }
+
+
+        .coordinate-label {
+
+            color: #8a94a6;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        .coordinate-value {
+
+            color: #172033;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        /* =================================================
+           MOBILE
+           ================================================= */
+
+        @media (max-width: 700px) {
+
+            .map-page-header {
+
+                padding: 45px 0 35px;
+            }
+
+
+            .map-container {
+
+                width: 94%;
+
+                margin-top: 22px;
+            }
+
+
+            .map-control-card {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                padding: 16px;
+            }
+
+
+            .location-control-left {
+
+                align-items: flex-start;
+            }
+
+
+            .my-location-btn {
+
+                width: 100%;
+            }
+
+
+            .map-card-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                padding: 16px;
+            }
+
+
+            .map-live-status {
+
+                align-self: flex-start;
+            }
+
+
+            #map {
+
+                height: 500px;
+
+                min-height: 400px;
+            }
+
+
+            .coordinates-box.show {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <span class="logo-icon">
+                    CL
+                </span>
+
+                <span class="logo-text">
+                    Civic<span>Lens</span>
+                </span>
+
+            </a>
+
+
+            <!-- NAVIGATION -->
+
+            <nav
+                class="nav-links"
+                id="navLinks"
+            >
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="report.html">
+                    Report Issue
+                </a>
+
+                <a href="track.html">
+                    Track Complaint
+                </a>
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+
+                <a
+                    href="map.html"
+                    class="active"
+                >
+                    Issue Map
+                </a>
+
+
+                <a href="admin.html">
+                    Admin
+                </a>
+
+            </nav>
+
+
+            <!-- MOBILE MENU -->
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+                type="button"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAP PAGE
+         ===================================================== -->
+
+    <main class="map-page">
+
+
+        <!-- =================================================
+             PAGE HEADER
+             ================================================= -->
+
+        <section class="map-page-header">
+
+            <div class="map-page-header-content">
+
+                <span class="map-badge">
+                    🗺️ Civic Issue Map
+                </span>
+
+
+                <h1>
+                    Explore Civic
+                    <span>Issues</span>
+                </h1>
+
+
+                <p>
+                    View reported civic issues on the interactive map
+                    and share your current location to identify nearby
+                    community problems.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MAP CONTAINER
+             ================================================= -->
+
+        <section class="map-container">
+
+
+            <!-- =================================================
+                 LOCATION CONTROL
+                 ================================================= -->
+
+            <div class="map-control-card">
+
+
+                <div class="location-control-left">
+
+                    <div class="location-icon">
+                        📍
+                    </div>
+
+
+                    <div class="location-text">
+
+                        <h3>
+                            Your Current Location
+                        </h3>
+
+                        <p id="locationMessage">
+                            Click "Use My Location" to show your
+                            current location on the map.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="myLocationBtn"
+                    class="my-location-btn"
+                >
+                    📍 Use My Location
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 LOCATION STATUS
+                 ================================================= -->
+
+            <div
+                id="locationStatus"
+                class="location-status"
+            >
+            </div>
+
+
+
+            <!-- =================================================
+                 MAP CARD
+                 ================================================= -->
+
+            <div class="map-card">
+
+
+                <!-- MAP HEADER -->
+
+                <div class="map-card-header">
+
+
+                    <div class="map-card-title">
+
+                        <div class="map-card-title-icon">
+                            🗺️
+                        </div>
+
+
+                        <div>
+
+                            <h2>
+                                Civic Issue Map
+                            </h2>
+
+                            <p>
+                                Reported issues and your current location
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="map-live-status">
+
+                        <span class="map-live-dot"></span>
+
+                        Interactive Map
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     LEAFLET MAP
+                     ================================================= -->
+
+                <div id="map"></div>
+
+
+
+                <!-- =================================================
+                     COORDINATES
+                     ================================================= -->
+
+                <div
+                    id="coordinatesBox"
+                    class="coordinates-box"
+                >
+
+                    <div class="coordinate-item">
+
+                        <span class="coordinate-label">
+                            Latitude
+                        </span>
+
+                        <span
+                            id="latitudeValue"
+                            class="coordinate-value"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="coordinate-item">
+
+                        <span class="coordinate-label">
+                            Longitude
+                        </span>
+
+                        <span
+                            id="longitudeValue"
+                            class="coordinate-value"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="coordinate-item">
+
+                        <span class="coordinate-label">
+                            Accuracy
+                        </span>
+
+                        <span
+                            id="accuracyValue"
+                            class="coordinate-value"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         LEAFLET JS
+         ===================================================== -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    ></script>
+
+
+
+    <!-- =====================================================
+         MAIN APP JS
+         ===================================================== -->
+
+    <script src="js/app.js"></script>
+
+
+
+    <!-- =====================================================
+         MAP JS
+         ===================================================== -->
+
+    <script src="js/map.js"></script>
+
+
+
+    <!-- =====================================================
+         LOCATION SCRIPT
+         ===================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+
+                const locationButton =
+                    document.getElementById(
+                        "myLocationBtn"
+                    );
+
+
+                const locationMessage =
+                    document.getElementById(
+                        "locationMessage"
+                    );
+
+
+                const locationStatus =
+                    document.getElementById(
+                        "locationStatus"
+                    );
+
+
+                const coordinatesBox =
+                    document.getElementById(
+                        "coordinatesBox"
+                    );
+
+
+                const latitudeValue =
+                    document.getElementById(
+                        "latitudeValue"
+                    );
+
+
+                const longitudeValue =
+                    document.getElementById(
+                        "longitudeValue"
+                    );
+
+
+                const accuracyValue =
+                    document.getElementById(
+                        "accuracyValue"
+                    );
+
+
+                let userMarker = null;
+
+                let accuracyCircle = null;
+
+
+
+                /* =================================================
+                   FIND EXISTING LEAFLET MAP
+                   ================================================= */
+
+                if (
+                    typeof map === "undefined"
+                ) {
+
+                    locationMessage.textContent =
+                        "Map could not be initialized. Please check map.js.";
+
+                   
